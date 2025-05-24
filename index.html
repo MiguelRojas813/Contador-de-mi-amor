@@ -7,31 +7,67 @@
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom right, #fbe4e5, #fcd8db);
       margin: 0;
       padding: 0;
-      overflow-y: auto; /* permite hacer scroll vertical */
-      height: 100vh;
+      overflow-x: hidden;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       text-align: center;
+      background: linear-gradient(to bottom right, #fbe4e5, #fcd8db);
+      position: relative;
+    }
+
+    .fondo-img-centro {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 900px;
+      height: auto;
+      transform: translate(-50%, -50%);
+      opacity: 0.70;
+      z-index: -1;
+      pointer-events: none;
     }
 
     .text p {
       margin: 5px 0;
       line-height: 1.4;
       font-weight: bold;
-      font-size: 1.5rem;
-      color: #5a2d2d;
+      font-size: 1.3rem;
+      color: #000000;
     }
 
-    .contador {
-      margin-top: 15px;
-      font-size: 1.5rem;
+    .reloj {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .unidad {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #fff5f5;
+      padding: 10px 15px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      min-width: 80px;
+    }
+
+    .numero {
+      font-size: 2rem;
       font-weight: bold;
       color: #d410a3;
+    }
+
+    .etiqueta {
+      font-size: 0.9rem;
+      color: #6b2c6b;
     }
 
     .corazon img {
@@ -82,44 +118,52 @@
       .text p {
         font-size: 1.1rem;
       }
-
-      .contador {
-        font-size: 1.3rem;
+      .numero {
+        font-size: 1.5rem;
       }
-
-      .corazon img {
-        width: 80%;
+      .etiqueta {
+        font-size: 0.8rem;
       }
     }
   </style>
 </head>
 <body>
+  <img src="https://i.imgur.com/Atn8GSX.jpg" alt="Imagen decorativa" class="fondo-img-centro">
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
   <div class="text">
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
     <p><strong>Para el amor de mi vida:</strong></p>
-    <p>
-      Desde el momento en que llegaste a mi vida, todo cambió para mejor.<br>
-      Tu sonrisa ilumina mis días, y tu amor me da fuerza cada instante.<br>
-      Este contador no mide solo el tiempo que ha pasado…<br>
-      Mide los momentos, los suspiros, los abrazos, las risas…<br>
-      y todo lo que aún nos espera.<br>
-      Te amo más con cada segundo que pasa.<br>
-      — Con todo mi corazón ❤️
-    </p>
+    <p>Desde el momento en que llegaste a mi vida, todo cambió para mejor.<br>
+    Tu sonrisa ilumina mis días, y tu amor me da fuerza cada instante.<br>
+    Este contador no mide solo el tiempo que ha pasado…<br>
+    Mide los momentos, los suspiros, los abrazos, las risas…<br>
+    y todo lo que aún nos espera.<br>
+    Te amo más con cada segundo que pasa.<br>
+    — Con todo mi corazón ❤️</p>
   </div>
 
-  <div class="contador">
-    Mi amor por ti comenzó hace...<br>
-    <span id="tiempo"></span>
-  </div>
-
-  <div class="corazon">
-    <img src="..//Contador de mi amor/imagenes/arbol corazones.png" alt="Árbol en forma de corazón">
+  <div class="reloj">
+    <div class="unidad">
+      <div class="numero" id="dias">0</div>
+      <div class="etiqueta">Días<br><small>Días de amor eterno</small></div>
+    </div>
+    <div class="unidad">
+      <div class="numero" id="horas">0</div>
+      <div class="etiqueta">Horas<br><small>Horas pensando en ti</small></div>
+    </div>
+    <div class="unidad">
+      <div class="numero" id="minutos">0</div>
+      <div class="etiqueta">Minutos<br><small>Minutos de sonrisas</small></div>
+    </div>
+    <div class="unidad">
+      <div class="numero" id="segundos">0</div>
+      <div class="etiqueta">Segundos<br><small>Segundos amándote</small></div>
+    </div>
   </div>
 
   <script>
@@ -131,8 +175,11 @@
       const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
       const minutos = Math.floor((diff / (1000 * 60)) % 60);
       const segundos = Math.floor((diff / 1000) % 60);
-      document.getElementById("tiempo").innerText =
-        `${dias} días ${horas} horas ${minutos} minutos ${segundos} segundos`;
+
+      document.getElementById("dias").textContent = dias;
+      document.getElementById("horas").textContent = horas;
+      document.getElementById("minutos").textContent = minutos;
+      document.getElementById("segundos").textContent = segundos;
     }
 
     setInterval(actualizarContador, 1000);
